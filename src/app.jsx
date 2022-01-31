@@ -1,7 +1,6 @@
 import './app.css';
-import Habits from './components/habits';
-
 import React, { Component } from 'react';
+import Habits from './components/habits';
 import Navbar from './components/navbar';
 
 class App extends Component {
@@ -40,7 +39,14 @@ class App extends Component {
   handleReset = () => {
     this.setState({
       ...this.state,
-      habits: [],
+      habits: this.state.habits.map((item) =>
+        item.count > 0
+          ? {
+              ...item,
+              count: 0,
+            }
+          : item
+      ),
     });
   };
 
